@@ -5,6 +5,7 @@ import { FollowRequest } from './follow_request.class';
 import createModel from '../../models/follow_request.model';
 import hooks from './follow_request.hooks';
 import onUserFollow from './events/onUserFollow';
+import onFrUpdated from './events/onFrUpdated';
 
 // Add this service to the service type index
 declare module '../../declarations' {
@@ -26,5 +27,6 @@ export default function (app: Application): void {
   const service = app.service('follow-request');
   service.on('created',onUserFollow)
   service.on('removed',onUserFollow)
+  service.on('patched',onFrUpdated)
   service.hooks(hooks);
 }

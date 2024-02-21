@@ -23,6 +23,6 @@ export default function (app: Application): void {
 
   // Get our initialized service so that we can register hooks
   const service = app.service('user');
-
+  
   service.hooks(hooks);
 }

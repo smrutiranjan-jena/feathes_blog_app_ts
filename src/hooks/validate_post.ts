@@ -20,6 +20,7 @@ export default (options = {}): Hook => {
     if (!description) {
       throw new BadRequest("description required")
     }
+    
     // check wheather the user is trying to create a post is exist or not
     await app.service('user').get(data.user).catch(() => {
       throw new BadRequest('invalid user')

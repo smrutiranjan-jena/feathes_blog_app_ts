@@ -3,7 +3,6 @@ import { like_Find, like_Get, like_Status } from '../interfaces/likeInterfaces';
 const onPostLiked = async (result: like_Get, context: HookContext) => {
     const { app } = context
     const { post } = result
-    console.log(result)
     const likeCount = await app.service('like')._find({
         query: {
             post,

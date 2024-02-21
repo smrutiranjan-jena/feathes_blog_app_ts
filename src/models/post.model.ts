@@ -13,6 +13,7 @@ export default function (app: Application): Model<any> {
   const schema = new Schema({
     user: {
       type: Schema.Types.ObjectId,
+      ref: 'user',
       required: true
     },
     title: {

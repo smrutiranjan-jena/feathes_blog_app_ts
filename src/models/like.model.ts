@@ -12,11 +12,21 @@ export default function (app: Application): Model<any> {
   const schema = new Schema({
     user: {
       type: Schema.Types.ObjectId,
+      ref: 'user',
+      required: true
+    },
+    entityType: {
+      type: String,
+      enum: ['post', 'comment'],
       required: true
     },
     post: {
       type: Schema.Types.ObjectId,
-      required: true
+      ref: 'post'
+    },
+    comment: {
+      type: Schema.Types.ObjectId,
+      ref: 'comment'
     },
     status: {
       type: Number,
