@@ -20,7 +20,7 @@ export default function (app: Application): Model<any> {
     },
     status: {
       type: Number,
-      enum: [1, -1, 2],
+      enum: [1, -1, 2, 3],
       default: 1
     }
   }, { timestamps: true });

@@ -2,7 +2,8 @@ import { Types } from "mongoose"
 export enum Follow_Request_status {
     PENDING = 1,
     ACCEPTED = 2,
-    REJECTED = -1
+    REJECTED = -1,
+    UNFOLLOW = 3
 }
 export interface Follow_Request_Get {
     _id: Types.ObjectId,
