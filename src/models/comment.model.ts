@@ -14,11 +14,19 @@ export default function (app: Application): Model<any> {
       type: Schema.Types.ObjectId,
       required: true
     },
+    entityType: {
+      type: String,
+      enum: ["post", "comment"]
+    },
     post: {
       type: Schema.Types.ObjectId,
-      required: true
+      ref: 'post'
     },
     comment: {
+      type: Schema.Types.ObjectId,
+      ref: 'comment'
+    },
+    commentText: {
       type: String,
       required: true
     },

@@ -4,7 +4,7 @@ import { Hook, HookContext } from '@feathersjs/feathers';
 export default (options = {}): Hook => {
   return async (context: HookContext): Promise<HookContext> => {
     const { app, data, params } = context
-    const { post, comment } = data
+    const { entityType, post, comment } = data
     const { user } = params
 
     // automatic set authenticated userId from context
@@ -15,11 +15,26 @@ export default (options = {}): Hook => {
     }
 
     // feild validation
-    if (!post) {
+    if (!entityType) {
+      throw new BadRequest('entityType is required')
+    }
+    if (entityType === 'post' && !post) {
       throw new BadRequest('post is required')
     }
-    if (!comment) {
+    if (entityType === 'comment' && !comment) {
       throw new BadRequest('comment is required')
+    }
+    if (entityType === 'post') {
+      // check the post you wants to comment is exist or not
+      await app.service('post')._get(post).catch(() => {
+        throw new BadRequest('invalid post id')
+      })
+    }
+    if (entityType === 'comment') {
+      // check the comment you wants to re-comment is exist or not
+      await app.service('comment')._get(comment).catch(() => {
+        throw new BadRequest('invalid comment id')
+      })
     }
     return context;
   };
