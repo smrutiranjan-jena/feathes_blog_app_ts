@@ -16,6 +16,9 @@ export default (options = {}): Hook => {
     }
 
     // feild validation
+    if (!entityType) {
+      throw new BadRequest('entityType is required')
+    }
     if (entityType === 'post' && !post) {
       throw new BadRequest('post is required')
     }
@@ -50,7 +53,7 @@ export default (options = {}): Hook => {
       }
     })
 
-    // check the same user on the same post alredy liked or not
+    // check the same user on the same comment alredy liked or not
     await app.service('like').find({
       query: {
         entityType: "comment",
